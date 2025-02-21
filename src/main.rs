@@ -15,6 +15,7 @@ struct Args {
 
 #[derive(Serialize, Deserialize, Debug, Default)]
 struct Mapping {
+
     file_mapping: HashMap<String, HashSet<String>>
 }
 
@@ -57,7 +58,7 @@ fn main() -> Result<(), u32> {
     }
 
     let output = Command::new("cmd")
-        .args(["/C", "git diff --name-only"])
+        .args(["/C", [String::from("git diff --name-only"), args.branch].join(" ").as_str()])
         .output()
         .expect("Failed to execute process");
     let diff_output = String::from_utf8_lossy(&output.stdout).to_string();
