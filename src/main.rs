@@ -32,7 +32,7 @@ impl Mapping {
 
     pub fn save(&self, file_path: String) {
         let target_file = std::fs::File::create(file_path).expect("Failed to open file");
-        serde_json::to_writer(target_file, self).expect("Failed to save Mapping");
+        serde_json::to_writer_pretty(target_file, self).expect("Failed to save Mapping");
     }
 
     pub fn update(&mut self, save_file: String, files: Vec<String>) {
